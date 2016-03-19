@@ -1,0 +1,28 @@
+kibana:
+    build: docker/kibana
+    hostname: kibana
+    links:  [ elasticsearch ]
+    ports:
+        - 5601:5601
+    volumes:
+        - ./confs:/confs 
+
+elasticsearch:
+    build: docker/elasticsearch
+    hostname: elasticsearch
+    ports:
+        - 9200:9200
+    volumes:
+        - ./confs:/confs 
+
+logstash:
+    build: docker/logstash
+    hostname: logstash
+    links: [ elasticsearch ]    
+    privileged: true
+    volumes:
+        - ./confs:/confs 
+    ports:
+        - 5114:5114/udp
+        - 5115:5115/udp
+        - 12201:12201/udp

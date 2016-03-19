@@ -1,0 +1,40 @@
+fpm:
+    build:        docker/php/7_0/fpm
+    links:        [ mysql ]
+    volumes:
+        - ./:/var/www/html
+    dns: [8.8.8.8]
+    dns_search: [ google.com ]
+
+apache:
+    build:        docker/apache
+    links:        [ fpm ]
+    volumes_from: [ fpm ]
+    ports:
+        - 80:80
+
+cli:
+    build:        docker/php/7_0/cli
+    volumes_from: [ fpm ]
+    links:        [ mysql ]
+    environment:
+        TERM: xterm-color
+    dns: [8.8.8.8]
+    dns_search: ["google.com"]
+
+mailcatcher:
+    build:        docker/mailcatcher
+    links:        [ fpm, cli ]
+    ports:
+        - 1080:1080
+    stdin_open:   true
+    tty:          true
+
+mysql:
+    build:  docker/mysql
+    environment:
+        MYSQL_ROOT_PASSWORD: e444tG7P4vpBMk
+    volumes:
+        - ./docker/mysql/data:/var/lib/mysql
+    ports:
+        - 3306:3306

@@ -1,0 +1,1 @@
+cp /root/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini

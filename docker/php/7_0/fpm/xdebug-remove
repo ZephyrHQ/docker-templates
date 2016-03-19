@@ -1,0 +1,1 @@
+mv /usr/local/etc/php/conf.d/xdebug.ini /root/xdebug.ini

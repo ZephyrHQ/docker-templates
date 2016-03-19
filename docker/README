@@ -1,0 +1,7 @@
+Dépendance de conteneurs - ATTENTION
+------------------------------------
+
+Pour les conteneurs suivants, dépendant d'autres conteneurs, il faut changer la 
+première ligne avec la nouvelle dépendance :
+
+    phpcli

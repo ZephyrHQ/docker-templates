@@ -1,0 +1,2 @@
+FROM solr:5
+
